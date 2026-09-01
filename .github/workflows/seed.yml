@@ -1,0 +1,62 @@
+name: seed
+
+# One-time / catch-up backfill: one runner per pending app version so no single
+# machine has to download every XAPK. Serialized (max-parallel: 1) so inventory
+# commits don't race. Safe to re-run — versions already scanned are skipped.
+
+on:
+  workflow_dispatch:
+    inputs:
+      max_versions:
+        description: "Cap the number of versions this run (blank = all pending)"
+        required: false
+        default: ""
+
+concurrency:
+  group: scrape          # shares the lock with daily-scrape
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.plan.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - id: plan
+        run: python scripts/seed.py --emit-matrix
+
+  seed:
+    needs: plan
+    if: fromJson(needs.plan.outputs.matrix).version[0] != null
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      max-parallel: 1
+      fail-fast: false
+      matrix: ${{ fromJson(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reclaim runner disk
+        run: |
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android /opt/hostedtoolcache/CodeQL
+          df -h /
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: Seed ${{ matrix.version }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          python scripts/scrape.py --only "${{ matrix.version }}" --push --commitish "${GITHUB_REF_NAME}"

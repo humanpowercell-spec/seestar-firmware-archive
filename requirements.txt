@@ -1,0 +1,6 @@
+# Self-contained: the APKPure client and bundle/signature logic are vendored
+# under scripts/ (apkpure.py, extract.py), kept in sync with
+# github.com/humanpowercell-spec/seestar-shell.
+requests>=2.31
+cryptography>=41
+# .deb payloads (zstd/xz/gzip) decompress via the system CLIs — no `zstandard`.

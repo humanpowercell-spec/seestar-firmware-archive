@@ -1,0 +1,16 @@
+# scrape scratch space — XAPK downloads, extracted trees, staged release assets
+_work/
+apk_cache/
+*.xapk
+*.apk
+
+# firmware bundles / archives are never committed; they live as release assets
+*.bz
+*.bz2
+*.tar.zst
+
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.DS_Store
