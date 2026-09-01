@@ -24,6 +24,7 @@ from __future__ import annotations
 import argparse
 import gzip
 import hashlib
+import io
 import json
 import shutil
 import subprocess
@@ -36,7 +37,7 @@ from extract import (
     find_firmware_bundles, extract_bundle_tree, esp32_bins, tracked_files,
     make_tar_zst,
 )
-from ghrelease import ensure_release, upload_asset
+from ghrelease import ensure_release, upload_asset, list_assets
 from report import ver_key, regenerate
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
@@ -217,8 +218,10 @@ def process_version(ver: str, url: str, inventory: dict, blob_index: dict,
     assets.append((manifest_asset, "manifest.json", "application/json"))
 
     MANIFEST_DIR.mkdir(parents=True, exist_ok=True)
-    with gzip.open(MANIFEST_DIR / f"{ver}.json.gz", "wt") as fh:
-        json.dump(combined_manifest, fh, indent=1)
+    _mbuf = io.BytesIO()
+    with gzip.GzipFile(fileobj=_mbuf, mode="wb", mtime=0) as _gz:
+        _gz.write(json.dumps(combined_manifest, indent=1).encode())
+    (MANIFEST_DIR / f"{ver}.json.gz").write_bytes(_mbuf.getvalue())
 
     # inventory entry
     entry.update({
@@ -233,6 +236,13 @@ def process_version(ver: str, url: str, inventory: dict, blob_index: dict,
     entry.pop("download_error", None)
     entry.pop("scan_error", None)
     _update_blob_index(blob_index, ver, manifests)
+
+    # metadata.json as a release asset too — reindex.py rebuilds the whole
+    # in-repo inventory purely from these small per-release assets, so the
+    # matrix jobs never have to commit (and never race on the JSON files).
+    meta_asset = assets_dir / "metadata.json"
+    meta_asset.write_text(json.dumps(entry, indent=2, sort_keys=True))
+    assets.append((meta_asset, "metadata.json", "application/json"))
 
     # publish
     if not args.no_publish:
@@ -265,7 +275,13 @@ def publish(ver: str, entry: dict, assets, esp32_meta: dict, assets_dir: Path,
     ])
     rel = ensure_release(tag, f"Seestar app {ver}", body,
                          target_commitish=args.commitish or None)
+    have = list_assets(rel)
+    small = {"manifest.json", "metadata.json"}  # always refresh these
     for path, name, ctype in assets:
+        existing = have.get(name)
+        if existing and existing["size"] == path.stat().st_size and name not in small:
+            print(f"    keep   {name} (already uploaded)")
+            continue
         print(f"    upload {name} ({path.stat().st_size:,} B)")
         upload_asset(rel, path, name, clobber=True, content_type=ctype)
 

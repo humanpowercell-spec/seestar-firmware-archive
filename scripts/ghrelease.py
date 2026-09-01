@@ -57,6 +57,16 @@ def get_release(tag: str) -> dict | None:
     return r.json() if r.status_code == 200 else None
 
 
+def list_releases() -> list[dict]:
+    out, url = [], f"{API}/repos/{_repo()}/releases?per_page=100"
+    while url:
+        r = _req("GET", url)
+        r.raise_for_status()
+        out.extend(r.json())
+        url = r.links.get("next", {}).get("url")
+    return out
+
+
 def ensure_release(tag: str, name: str, body: str, prerelease: bool = False,
                    target_commitish: str | None = None) -> dict:
     """Get the release for `tag`, creating it (and the tag) if absent; update notes if present."""

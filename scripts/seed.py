@@ -1,23 +1,16 @@
 """
-One-time backfill helper.
+Backfill planning: list the APKPure versions that don't yet have a complete
+`app/<v>` release (one carrying a `metadata.json` asset). Re-runnable — already
+published versions drop off the list.
 
-The daily scrape processes every version APKPure offers that isn't in the
-inventory, so the very first run *is* the backfill — but downloading ~20 XAPKs
-(~1 GB each) plus building their trees will blow a single runner's disk. Two ways
-to seed instead:
+  Locally, sequentially:
+      for v in $(scripts/seed.py --list); do
+        scripts/scrape.py --only "$v" --push --no-commit
+      done
+      scripts/reindex.py --push
 
-  1. Locally, sequentially, keeping disk in check:
-        for v in $(scripts/seed.py --list); do
-          scripts/scrape.py --only "$v" --push
-        done
-
-  2. In CI, one runner per version (see .github/workflows/seed.yml):
-        scripts/seed.py --emit-matrix
-
-`--from-local` imports an already-built store instead of re-downloading — point
-it at seestar-s30-re/firmware/historical (fw_inventory.json + manifests/) to
-carry over what's already been extracted, then only the release-asset upload
-still needs the bundles.
+  In CI, one runner per version (see .github/workflows/seed.yml):
+      scripts/seed.py --emit-matrix
 """
 
 from __future__ import annotations
@@ -29,17 +22,26 @@ import sys
 from pathlib import Path
 
 from apkpure import fetch_versions
+from ghrelease import list_releases
 from report import ver_key
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-INV_PATH = REPO_ROOT / "inventory" / "fw_inventory.json"
+
+
+def _published() -> set[str]:
+    """Versions whose app/<v> release already has its metadata.json asset."""
+    done = set()
+    for rel in list_releases():
+        tag = rel["tag_name"]
+        if tag.startswith("app/") and any(a["name"] == "metadata.json" for a in rel["assets"]):
+            done.add(tag.split("/", 1)[1])
+    return done
 
 
 def pending() -> list[str]:
-    inv = json.loads(INV_PATH.read_text()) if INV_PATH.exists() else {}
     remote = [v["version"] for v in fetch_versions()]
-    return sorted((v for v in remote
-                   if v not in inv or not inv[v].get("scanned")), key=ver_key)
+    done = _published()
+    return sorted((v for v in remote if v not in done), key=ver_key)
 
 
 def main() -> int:

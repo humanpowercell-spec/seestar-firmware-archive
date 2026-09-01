@@ -43,15 +43,21 @@ inventory/
   manifests/<ver>.json.gz  full path->sha256 listing per app version
   metadata/<ver>.json      the fw_inventory record for one version, standalone
 scripts/
-  scrape.py                daily entrypoint: diff APKPure, extract, publish
+  scrape.py                diff APKPure, extract, publish app/<ver> + esp32/<fwver> releases
+  reindex.py               rebuild inventory/ + HISTORY.md from the releases, commit once
   extract.py               signed bundle -> real file tree + manifest
   ghrelease.py             GitHub Releases over the REST API (no gh binary)
-  report.py                regenerate HISTORY.md from the inventory
+  report.py                render HISTORY.md from the inventory
   restore.py               rebuild a version's tree from its release
   seed.py                  backfill planning / matrix emission
 .github/workflows/
-  daily-scrape.yml         06:17 UTC cron + manual
-  seed.yml                 one-time backfill, one runner per version
+  daily-scrape.yml         06:17 UTC cron + manual — scrape then reindex
+  seed.yml                 backfill: one runner per version, then a single reindex job
+
+The version jobs only ever create releases. `reindex.py` is the **single writer**
+of everything committed to git (each release carries a small `metadata.json` +
+`manifest.json` it rebuilds from), so parallel version jobs never race on the
+inventory files.
 ```
 
 Bundle discovery, signature verification, the APKPure API client and the
@@ -67,7 +73,8 @@ pip install -r requirements.txt
 export GITHUB_REPOSITORY=humanpowercell-spec/seestar-firmware-archive-
 export GITHUB_TOKEN=<contents:write token>
 
-python scripts/scrape.py                      # process anything new, commit, no push
+python scripts/scrape.py --push --no-commit          # publish releases for new versions
+python scripts/reindex.py --push                     # resync inventory/ + HISTORY.md from releases
 python scripts/scrape.py --only 3.3.1 --no-publish   # extract one version, inspect _work/
 python scripts/restore.py 3.3.1 ./out --verify       # rebuild + checksum a version
 ```
