@@ -1,0 +1,46 @@
+{
+  "bundles": {
+    "assets/iscope": {
+      "file_count": 1702,
+      "rootfs_asset": "rootfs-iscope.tar.zst",
+      "rootfs_size": 264557636,
+      "signature_valid": true
+    }
+  },
+  "download_url": "https://download.pureapk.com/b/XAPK/Y29tLnp3by5zZWVzdGFyXzgzXzZjYTA2NDUw?_fn=U2Vlc3Rhcl92Mi41LjBfYXBrcHVyZS5jb20ueGFwaw&as=e2430ec94dbe8df58cc545da337d41ab6a986a3f&ai=1311335788&at=1788287167&_sa=ai%2Cat&k=eca17aae53dd45518afac379739423a36a99bbbf&_p=Y29tLnp3by5zZWVzdGFy&c=1%7CPHOTOGRAPHY%7CZGV2PVN1emhvdSUyMFpXTyUyMENvLiUyQyUyMEx0ZC4mdD14YXBrJnM9ODkzOTE2MjMxJnZuPTIuNS4wJnZjPTgzR",
+  "esp32_assets": {
+    "2.0.4": "Seestar_2.0.4.bin"
+  },
+  "esp32_firmware": [
+    "2.0.4"
+  ],
+  "release_tag": "app/2.5.0",
+  "scanned": true,
+  "scanned_at": "2026-09-01T18:28:19.881225+00:00",
+  "tracked_assets": [
+    "AM_Test",
+    "air_ble",
+    "auto_shutdown.sh",
+    "beeper",
+    "bluetooth.sh",
+    "bsa_server",
+    "common.sh",
+    "exiv2",
+    "flash_power_led",
+    "network.sh",
+    "old_log_mv.sh",
+    "planet.py",
+    "run_update_pack.sh",
+    "searchSSIDIndex.py",
+    "set_timezone.sh",
+    "start_INDI.sh",
+    "write_wpa_conf.sh",
+    "zwoair_daemon.sh",
+    "zwoair_file_server",
+    "zwoair_guider",
+    "zwoair_imager",
+    "zwoair_updater"
+  ],
+  "version": "2.5.0",
+  "xapk_size": 893916231
+}

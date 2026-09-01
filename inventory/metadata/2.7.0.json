@@ -1,0 +1,67 @@
+{
+  "bundles": {
+    "assets/iscope": {
+      "file_count": 2145,
+      "rootfs_asset": "rootfs-iscope.tar.zst",
+      "rootfs_size": 364196347,
+      "signature_valid": true
+    },
+    "assets/iscope_64": {
+      "file_count": 36,
+      "rootfs_asset": "rootfs-iscope_64.tar.zst",
+      "rootfs_size": 5930760,
+      "signature_valid": true
+    }
+  },
+  "download_url": "https://download.pureapk.com/b/XAPK/Y29tLnp3by5zZWVzdGFyXzEwMV9mMDcyZjA5?_fn=U2Vlc3Rhcl92Mi43LjBfYXBrcHVyZS5jb20ueGFwaw&as=8c3d90c0a6c576d187b07534c371de926a986b3d&ai=1915622018&at=1788287421&_sa=ai%2Cat&k=bc2efa7a4574704b2770ccbababdc3756a99bcbd&_p=Y29tLnp3by5zZWVzdGFy&c=1%7CPHOTOGRAPHY%7CZGV2PVN1emhvdSUyMFpXTyUyMENvLiUyQyUyMEx0ZC4mdD14YXBrJnM9MTA0OTQ2OTI0OCZ2bj0yLjcuMCZ2Yz0xMDER",
+  "esp32_assets": {
+    "2.1.4": "Seestar_2.1.4.bin"
+  },
+  "esp32_firmware": [
+    "2.1.4"
+  ],
+  "release_tag": "app/2.7.0",
+  "scanned": true,
+  "scanned_at": "2026-09-01T18:33:50.603158+00:00",
+  "tracked_assets": [
+    "AM_Test.aarch64",
+    "AM_Test.armhf",
+    "air_ble.aarch64",
+    "air_ble.armhf",
+    "auto_shutdown.sh",
+    "beeper.aarch64",
+    "beeper.armhf",
+    "bluetooth.sh.aarch64",
+    "bluetooth.sh.armhf",
+    "bsa_server",
+    "common.sh",
+    "exiv2.aarch64",
+    "exiv2.armhf",
+    "flash_power_led.aarch64",
+    "flash_power_led.armhf",
+    "network.sh.aarch64",
+    "network.sh.armhf",
+    "old_log_mv.sh",
+    "planet.py",
+    "run_update_pack.sh.aarch64",
+    "run_update_pack.sh.armhf",
+    "searchSSIDIndex.py",
+    "set_timezone.sh.aarch64",
+    "set_timezone.sh.armhf",
+    "start_INDI.sh",
+    "write_wpa_conf.sh",
+    "zwoair_daemon.sh.aarch64",
+    "zwoair_daemon.sh.armhf",
+    "zwoair_file_server.aarch64",
+    "zwoair_file_server.armhf",
+    "zwoair_guider.aarch64",
+    "zwoair_guider.armhf",
+    "zwoair_imager.aarch64",
+    "zwoair_imager.armhf",
+    "zwoair_updater.aarch64.71a1ae68da7c",
+    "zwoair_updater.aarch64.92cd9a5a4a60",
+    "zwoair_updater.armhf"
+  ],
+  "version": "2.7.0",
+  "xapk_size": 1049469248
+}

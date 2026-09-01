@@ -1,0 +1,69 @@
+{
+  "bundles": {
+    "assets/iscope": {
+      "file_count": 2196,
+      "rootfs_asset": "rootfs-iscope.tar.zst",
+      "rootfs_size": 272175810,
+      "signature_valid": true
+    },
+    "assets/iscope_64": {
+      "file_count": 413,
+      "rootfs_asset": "rootfs-iscope_64.tar.zst",
+      "rootfs_size": 104714752,
+      "signature_valid": true
+    }
+  },
+  "download_url": "https://download.pureapk.com/b/XAPK/Y29tLnp3by5zZWVzdGFyXzEzOF9mNDFhNTJhMw?_fn=U2Vlc3Rhcl92My4zLjFfYXBrcHVyZS5jb20ueGFwaw&as=c0ebdcb7b3145a3982c816225bc7a5526a987043&ai=512124912&at=1788288707&_sa=ai%2Cat&k=784f7048e0d010b441a2471a727cb9ce6a99c1c3&_p=Y29tLnp3by5zZWVzdGFy&c=1%7CPHOTOGRAPHY%7CZGV2PVN1emhvdSUyMFpXTyUyMENvLiUyQyUyMEx0ZC4mdD14YXBrJnM9MTQwMzYxMzg5OSZ2bj0zLjMuMSZ2Yz0xMzg",
+  "esp32_assets": {
+    "2.3.7": "Seestar_2.3.7.bin"
+  },
+  "esp32_firmware": [
+    "2.3.7"
+  ],
+  "release_tag": "app/3.3.1",
+  "scanned": true,
+  "scanned_at": "2026-09-01T18:55:53.338227+00:00",
+  "tracked_assets": [
+    "AM_Test.aarch64",
+    "AM_Test.armhf",
+    "air_ble.aarch64",
+    "air_ble.armhf",
+    "auto_shutdown.sh.aarch64",
+    "auto_shutdown.sh.armhf",
+    "beeper.aarch64",
+    "beeper.armhf",
+    "bluetooth.sh.aarch64",
+    "bluetooth.sh.armhf",
+    "bsa_server",
+    "common.sh",
+    "crashpad_handler.aarch64",
+    "crashpad_handler.armhf",
+    "exiv2.aarch64",
+    "exiv2.armhf",
+    "flash_power_led.aarch64",
+    "flash_power_led.armhf",
+    "network.sh.aarch64",
+    "network.sh.armhf",
+    "old_log_mv.sh",
+    "planet.py",
+    "run_update_pack.sh.aarch64",
+    "run_update_pack.sh.armhf",
+    "searchSSIDIndex.py",
+    "set_timezone.sh.aarch64",
+    "set_timezone.sh.armhf",
+    "start_INDI.sh",
+    "write_wpa_conf.sh",
+    "zwoair_daemon.sh.aarch64",
+    "zwoair_daemon.sh.armhf",
+    "zwoair_file_server.aarch64",
+    "zwoair_file_server.armhf",
+    "zwoair_guider.aarch64",
+    "zwoair_guider.armhf",
+    "zwoair_imager.aarch64",
+    "zwoair_imager.armhf",
+    "zwoair_updater.aarch64",
+    "zwoair_updater.armhf"
+  ],
+  "version": "3.3.1",
+  "xapk_size": 1403613899
+}

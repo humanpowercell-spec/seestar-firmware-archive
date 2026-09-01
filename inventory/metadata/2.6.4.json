@@ -1,0 +1,65 @@
+{
+  "bundles": {
+    "assets/iscope": {
+      "file_count": 2145,
+      "rootfs_asset": "rootfs-iscope.tar.zst",
+      "rootfs_size": 364870490,
+      "signature_valid": true
+    },
+    "assets/iscope_64": {
+      "file_count": 37,
+      "rootfs_asset": "rootfs-iscope_64.tar.zst",
+      "rootfs_size": 5928181,
+      "signature_valid": true
+    }
+  },
+  "download_url": "https://download.pureapk.com/b/XAPK/Y29tLnp3by5zZWVzdGFyXzk2X2E3MzM4Y2Nl?_fn=U2Vlc3Rhcl92Mi42LjRfYXBrcHVyZS5jb20ueGFwaw&as=65758876770a6124b85875e1f2a7984f6a986b35&ai=1787011537&at=1788287413&_sa=ai%2Cat&k=1a8ee8da43da5f8ace60c9ebc52e35776a99bcb5&_p=Y29tLnp3by5zZWVzdGFy&c=1%7CPHOTOGRAPHY%7CZGV2PVN1emhvdSUyMFpXTyUyMENvLiUyQyUyMEx0ZC4mdD14YXBrJnM9MTA5Njk4NDg5OCZ2bj0yLjYuNCZ2Yz05NgR",
+  "esp32_assets": {
+    "2.1.3": "Seestar_2.1.3.bin"
+  },
+  "esp32_firmware": [
+    "2.1.3"
+  ],
+  "release_tag": "app/2.6.4",
+  "scanned": true,
+  "scanned_at": "2026-09-01T18:34:05.014498+00:00",
+  "tracked_assets": [
+    "AM_Test.aarch64",
+    "AM_Test.armhf",
+    "air_ble.aarch64",
+    "air_ble.armhf",
+    "auto_shutdown.sh",
+    "beeper.aarch64",
+    "beeper.armhf",
+    "bluetooth.sh.aarch64",
+    "bluetooth.sh.armhf",
+    "bsa_server",
+    "common.sh",
+    "exiv2.aarch64",
+    "exiv2.armhf",
+    "flash_power_led.aarch64",
+    "flash_power_led.armhf",
+    "network.sh",
+    "old_log_mv.sh",
+    "planet.py",
+    "run_update_pack.sh.aarch64",
+    "run_update_pack.sh.armhf",
+    "searchSSIDIndex.py",
+    "set_timezone.sh.aarch64",
+    "set_timezone.sh.armhf",
+    "start_INDI.sh",
+    "write_wpa_conf.sh",
+    "zwoair_daemon.sh",
+    "zwoair_file_server.aarch64",
+    "zwoair_file_server.armhf",
+    "zwoair_guider.aarch64",
+    "zwoair_guider.armhf",
+    "zwoair_imager.aarch64",
+    "zwoair_imager.armhf",
+    "zwoair_updater.aarch64.57953dc64a28",
+    "zwoair_updater.aarch64.71a1ae68da7c",
+    "zwoair_updater.armhf"
+  ],
+  "version": "2.6.4",
+  "xapk_size": 1096984898
+}
