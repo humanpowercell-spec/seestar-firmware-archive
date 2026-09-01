@@ -10,7 +10,7 @@ historical app version off APKPure, verifies and unpacks those bundles, and
 publishes one **GitHub Release per app version** with the fully extracted trees.
 
 - **History + per-binary changelog:** [`HISTORY.md`](HISTORY.md) (generated)
-- **Releases:** <https://github.com/humanpowercell-spec/seestar-firmware-archive/releases>
+- **Releases:** <https://github.com/humanpowercell-spec/seestar-firmware-archive-/releases>
 
 ## What's in each release
 
@@ -55,15 +55,16 @@ scripts/
 ```
 
 Bundle discovery, signature verification, the APKPure API client and the
-resumable XAPK downloader are imported from
-[`seestar-shell`](https://github.com/humanpowercell-spec/seestar-shell) —
-single source of truth, pinned in `requirements.txt`.
+resumable XAPK downloader are vendored (`scripts/apkpure.py`, `scripts/extract.py`)
+from [`seestar-shell`](https://github.com/humanpowercell-spec/seestar-shell) so
+CI needs nothing but this repo's own token. Keep them in sync with upstream if
+its protobuf parsing or bundle handling changes.
 
 ## Local use
 
 ```bash
 pip install -r requirements.txt
-export GITHUB_REPOSITORY=humanpowercell-spec/seestar-firmware-archive
+export GITHUB_REPOSITORY=humanpowercell-spec/seestar-firmware-archive-
 export GITHUB_TOKEN=<contents:write token>
 
 python scripts/scrape.py                      # process anything new, commit, no push
