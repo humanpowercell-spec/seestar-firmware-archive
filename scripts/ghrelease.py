@@ -39,10 +39,13 @@ def _headers() -> dict:
 
 
 def _req(method: str, url: str, timeout: int = 60, retry: bool = True,
-         **kw) -> requests.Response:
+         headers: dict | None = None, **kw) -> requests.Response:
+    hdrs = _headers()
+    if headers:
+        hdrs.update(headers)
     attempts = 4 if retry else 1
     for attempt in range(attempts):
-        r = requests.request(method, url, headers=_headers(), timeout=timeout, **kw)
+        r = requests.request(method, url, headers=hdrs, timeout=timeout, **kw)
         if retry and r.status_code in (403, 429) and "rate limit" in r.text.lower():
             wait = 2 ** attempt * 15
             print(f"  rate limited, sleeping {wait}s")
