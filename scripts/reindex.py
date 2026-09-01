@@ -39,8 +39,9 @@ def _download_text(rel: dict, name: str) -> str | None:
 
 
 def rebuild() -> list[str]:
-    releases = [r for r in list_releases() if r["tag_name"].startswith("app/")]
-    print(f"{len(releases)} app/* release(s)")
+    all_releases = list_releases()
+    releases = [r for r in all_releases if r["tag_name"].startswith("app/")]
+    print(f"{len(all_releases)} release(s) total, {len(releases)} tagged app/*")
 
     inventory: dict = {}
     blob_index: dict = {}
@@ -48,10 +49,12 @@ def rebuild() -> list[str]:
 
     for rel in sorted(releases, key=lambda r: ver_key(r["tag_name"].split("/", 1)[1])):
         ver = rel["tag_name"].split("/", 1)[1]
+        asset_names = sorted(a["name"] for a in rel["assets"])
         meta_txt = _download_text(rel, "metadata.json")
         man_txt = _download_text(rel, "manifest.json")
         if meta_txt is None or man_txt is None:
-            print(f"  {ver}: missing metadata.json/manifest.json — skipping")
+            print(f"  {ver}: missing metadata.json/manifest.json "
+                  f"(has {len(asset_names)} asset(s): {', '.join(asset_names) or 'none'}) — skipping")
             continue
 
         entry = json.loads(meta_txt)
