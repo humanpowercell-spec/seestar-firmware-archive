@@ -10,7 +10,7 @@ historical app version off APKPure, verifies and unpacks those bundles, and
 publishes one **GitHub Release per app version** with the fully extracted trees.
 
 - **History + per-binary changelog:** [`HISTORY.md`](HISTORY.md) (generated)
-- **Releases:** <https://github.com/humanpowercell-spec/seestar-firmware-archive-/releases>
+- **Releases:** <https://github.com/humanpowercell-spec/seestar-firmware-archive/releases>
 
 ## What's in each release
 
@@ -70,7 +70,7 @@ its protobuf parsing or bundle handling changes.
 
 ```bash
 pip install -r requirements.txt
-export GITHUB_REPOSITORY=humanpowercell-spec/seestar-firmware-archive-
+export GITHUB_REPOSITORY=humanpowercell-spec/seestar-firmware-archive
 export GITHUB_TOKEN=<contents:write token>
 
 python scripts/scrape.py --push --no-commit          # publish releases for new versions
