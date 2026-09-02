@@ -30,8 +30,8 @@ listing which app versions shipped it.
 ## Why releases instead of Git / LFS
 
 Release assets don't count against repo size, have a 2 GB/file limit (our largest
-blob is ~150 MB), and download unmetered without auth. Git can't hold the
->100 MB blobs; LFS would cost money at this volume. The repo itself only tracks
+blob is ~150 MB), and download unmetered without auth. Git can't hold blobs over
+100 MB at all; LFS would cost money at this volume. The repo itself only tracks
 the small stuff: `inventory/` JSON, gzipped per-version manifests, `HISTORY.md`.
 
 ## Layout
