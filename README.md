@@ -53,12 +53,13 @@ scripts/
 .github/workflows/
   daily-scrape.yml         06:17 UTC cron + manual — scrape then reindex
   seed.yml                 backfill: one runner per version, then a single reindex job
+  reindex.yml              manual — rebuild inventory/ + HISTORY.md from the releases
+```
 
 The version jobs only ever create releases. `reindex.py` is the **single writer**
 of everything committed to git (each release carries a small `metadata.json` +
 `manifest.json` it rebuilds from), so parallel version jobs never race on the
 inventory files.
-```
 
 Bundle discovery, signature verification, the APKPure API client and the
 resumable XAPK downloader are vendored (`scripts/apkpure.py`, `scripts/extract.py`)
