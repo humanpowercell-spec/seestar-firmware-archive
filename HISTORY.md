@@ -1,6 +1,6 @@
 # Seestar Firmware Version History
 
-_Generated 2026-09-16T11:46:02.515598+00:00 — do not edit, produced by `scripts/report.py`._
+_Generated 2026-09-17T11:50:44.778213+00:00 — do not edit, produced by `scripts/report.py`._
 
 Reconstructed from the `assets/iscope` / `assets/iscope_64` signed firmware
 bundles embedded in every historical Seestar Android app release (APKPure).
